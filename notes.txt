@@ -15,17 +15,17 @@ https://home.nest.com/login/oauth2?client_id=6a315a8f-8e6e-409a-a2e0-88a69c77693
 
 
  $.ajax({
-                    // POST to /api/v1/nodes
-                    type: "POST",
-                    url: "http://cs102008.test.com/cs105/llisapi.dll/api/v1/nodes",
+                    
+                    type: "GET",
+                    url: "https://developer-api.nest.com/",
                     // Our data is the FormData object we set up above.
-                    data: fd,
+                    //data: fd,
                     contentType: false,
                     processData: false,
                     dataType: 'json',
                     beforeSend: function( xhr ) {
                         // Add the ticket from the Autheticate function to the request header.
-                        xhr.setRequestHeader( "otcsticket", otcsticket ),
+                        xhr.setRequestHeader( "authorization", "Bearer c.s7K5ndoFFMrwvCbFypU2U29sRxlTQZ4jSJTvWD6zHLOxuRJjznVkm38MJi204sQrJnFhvQn3pygTeoM8IFLpLZfQwSlXE47zzs6JrPzGHW3X4FRW0FqNlbOi9sUYeBfFMnLePx1Gjfqn8MgS" ),
                         // Update the MimeType as required.
                         xhr.overrideMimeType( "multipart/form-data" )
                     }
