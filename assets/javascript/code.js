@@ -9,7 +9,14 @@ var thermostat =
 var weather =
 {
     currentTemp: 0,
-    humidity: 0
+    humidity: 0,
+    condition: "",
+    pressure: 0,
+    wind: 
+    {
+        speed: 0,
+        direction: 0
+    }
 }
 
 var user =
@@ -81,6 +88,7 @@ $.ajax({
 }
 
 NESTPole();
+
 //OpenWeather AJAX call
 $.ajax({
     url: `${weatherURL}q=${userLocation}&appid=${weatherKey}`,
@@ -93,6 +101,7 @@ $.ajax({
     console.log(weather.currentTemp)
     weather.humidity=response.main.humidity
     drawWeatherData()
+
 })
 
 $("#submitButton").on("click", function(){
@@ -101,7 +110,7 @@ $("#submitButton").on("click", function(){
 })
 
 //thermostat up
-$("#thermostatUp").on("click", function(){
+//$("#thermostatUp").on("click", function(){
     $.ajax({
         url: `https://cors-escape.herokuapp.com/${nestURL}/devices/thermostats/uks8vKYvLFpURdo8n8GzwpNxir2Vn9sC/?auth=${nestAuthToken}`,
         type: "PUT",
@@ -119,4 +128,4 @@ $("#thermostatUp").on("click", function(){
             drawThermostatData()
         })
     
-})
+//})
