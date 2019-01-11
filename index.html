@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase.js"></script>
   <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.5.0/css/all.css' integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU' crossorigin='anonymous'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -56,7 +57,7 @@
             <div class="page-header">
 
             <!-- User Location detail goes here -->
-              <h1 id="user-location"></h1>
+              <h1 id="user-location">User Location</h1>
             
             </div>
 
@@ -67,11 +68,11 @@
                 <!-- Show Open Weather API here        --> 
                 <!-- We need to show temperature       -->
                 <!-- Show main.temp                    -->
-                <div id ="user-temp"> </div> 
+                <div id ="user-temp">Thermostat details:<br> </div> 
 
                  <!-- We need to show temperature detail like humidity, temp max, temp min, and wind speed here  --> 
                  <!-- Show main.temp_max, main.temp_min and wind.speed  --> 
-                <div id ="temp-detail"> </div>
+                <div id ="temp-detail">Weather Details </div>
               </div>
 
               <!-- Location top stories detail goes here -->
@@ -173,7 +174,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <!-- Custom .js -->
+
 <script src="assets/javascript/code.js"></script>  
+=======
+
   
 </body>
 </html>
