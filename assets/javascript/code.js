@@ -9,8 +9,13 @@ var thermostat =
 var weather =
 {
     currentTemp: 0,
-    humidity: 0
-}
+    humidity: 0,
+    mainDescription: "",
+    subDescription: "",
+    windSpeed: 10,
+    windDirection: 0,
+    airPressue: 0,
+} 
 
 var user =
 {
@@ -35,6 +40,7 @@ function drawThermostatData(){
 
 function drawWeatherData(){
     $("#temp-detail").text("")
+    $("")
     $("#temp-detail").append(`<br>Outdoor Temperature: ${weather.currentTemp}<br>`)
     $("#temp-detail").append(`Outdoor Humidity: ${weather.humidity}`)
 }
@@ -55,9 +61,18 @@ var config = {
   var database = firebase.database();
 
 //NEST thermostat API AJAX call 
-var NESTpoleInterval = setInterval(NESTPole(), 1000*60*5)
+var NESTGETInterval = setInterval(NESTGET(), 1000*60*5)
 
-function NESTPole(){
+function dbPush(){
+    database.ref().push({
+        currentTemp: thermostat.currentTemp,
+        targetTemp: thermostat.targetTemp,
+        humidity: thermostat.humidity 
+    })
+}
+
+
+function NESTGET(){
 $.ajax({
     url: `https://cors-escape.herokuapp.com/${nestURL}/?auth=${nestAuthToken}`,
     type: "GET",
@@ -71,16 +86,14 @@ $.ajax({
         console.log(thermostat.currentTemp)
         console.log(thermostat.targetTemp)
         console.log(thermostat.humidity)
-        drawThermostatData()
+        drawThermostatData();
+        dbPush();
     })
-    database.ref().push({
-        currentTemp: thermostat.currentTemp,
-        targetTemp: thermostat.targetTemp,
-        humidity: thermostat.humidity 
-    })
+
 }
 
-NESTPole();
+NESTGET();
+
 //OpenWeather AJAX call
 $.ajax({
     url: `${weatherURL}q=${userLocation}&appid=${weatherKey}`,
@@ -88,10 +101,11 @@ $.ajax({
 }).then(function (response)
 {
     console.log(response)
-    console.log(response.main.temp)
     weather.currentTemp=Math.floor(response.main.temp-273)
-    console.log(weather.currentTemp)
     weather.humidity=response.main.humidity
+    console.log(response.weather[0].description)
+    weather.mainDescription=response.weather[0].main
+    weather.subDescription=response.weather[0].description
     drawWeatherData()
 })
 

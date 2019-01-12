@@ -1,0 +1,47 @@
+#user-temp {
+  font-size: 60pt;
+  color:#13aab0;
+}
+
+#user-temp sup {
+  font-size: 30pt;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.DetailTitle {
+  font-size: 20pt;
+  color: black;
+  display:inline-block;
+  margin-top:20px;
+}
+
+.DetailTable {
+  display:inline-block;
+  margin-top: 10px;
+}
+
+.mainresults {
+  font-weight: bold;
+  color:#13aab0;
+}
+.col-md-6{
+  width:700px;
+}
+
+
+#TopStories {
+  width:700px;
+}
+.row {
+  width:1000px;
+}
+
+.TopStories {
+  display: inline-block;
+  background:#6fd1d4;
+  width:100%;
+  padding: 10px;
+  border-radius: 5px;
+  background: url(../../storybg.png) no-repeat 180px 80px;
+}
