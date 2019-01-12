@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase.js"></script>
   <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.5.0/css/all.css' integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU' crossorigin='anonymous'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -18,7 +17,7 @@
 
 
   <!-- Custom styles for this template -->
-  <link href="assets/css/styles.css" rel="stylesheet">
+  <link href="./assets/css/styles.css" rel="stylesheet">
   
   <!-- Firebase Reference -->
   <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
@@ -44,6 +43,7 @@
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 
                   <!-- when the users submit their location add their location here -->
+
                   <li class="dropdown-item">Toronto</li>
                   <li class="dropdown-item">Waterloo</li>
                   <li class="dropdown-item">Kitchner</li>
@@ -54,6 +54,7 @@
               </li>
             </ul>
           </div>
+
         <form class="css-3n5uzf">
         <input type="search" id="locationSearch" placeholder="location" aria-label="Search docs" class="css-1wo8d34"> 
         </form>
@@ -76,11 +77,13 @@
             <div class="page-header">
 
             <!-- User Location detail goes here -->
-              <h1 id="user-location">User Location</h1>
-            
+              <h1 id="user-location">
+                Waterloo, On, Canada
+              </h1>
             </div>
 
             <div class="row">
+
               <div class="col-md-4">
                 <!-- Show Open Weather API here        --> 
 
@@ -129,7 +132,6 @@
 
       <!-- Second Main Row -->
       <!--Create Card 1-->
-      <div class="row"></div>
             <div class="col-md-6">
               <div class="card mt-2">
                 <div class="card-body">
@@ -168,7 +170,7 @@
 
           <form role="form">
             <div class="form-group row">
-              <label for="name-input">Name:</label>
+              <label for="name-input">Name:</label><br>
               <input class="form-control" id="name-input" type="text">
             </div>
             <div class="form-group row">
@@ -210,10 +212,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <!-- Custom .js -->
-
-<script src="assets/javascript/code.js"></script>  
-=======
-
+<script src="Assets/javascript/code.js"></script>  
   
 </body>
 </html>
