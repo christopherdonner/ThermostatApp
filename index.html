@@ -3,7 +3,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase.js"></script>
   <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.5.0/css/all.css' integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU' crossorigin='anonymous'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -13,7 +12,7 @@
   <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
 
   <!-- Custom styles for this template -->
-  <link href="assets/css/styles.css" rel="stylesheet">
+  <link href="./assets/css/styles.css" rel="stylesheet">
   
   <!-- Firebase Reference -->
   <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
@@ -39,11 +38,11 @@
 
                   <!-- when the users submit their location add their location here -->
                   <li class="user-location"></li>
-
                 </ul>
               </li>
             </ul>
           </div>
+          <div class="Units"><a href="#" id="Celcius" style="color:white;">°C</a> | <a href="#" id="Celcius" style="color:white;">°F</a></div>
       </div>
     </nav>
   </header>
@@ -57,27 +56,61 @@
             <div class="page-header">
 
             <!-- User Location detail goes here -->
-              <h1 id="user-location">User Location</h1>
-            
+              <h1 id="user-location">
+                Waterloo, On, Canada
+              </h1>
             </div>
 
             <div class="row">
               <div class="col-md-6">
-
                 <!-- User temperature goes here        -->
                 <!-- Show Open Weather API here        --> 
                 <!-- We need to show temperature       -->
                 <!-- Show main.temp                    -->
-                <div id ="user-temp">Thermostat details:<br> </div> 
+                <div id ="user-temp"> </div>
+                <div>
+                <div id="user-temp"></div>-2<sup>°<span id="units"></span></sup><img src="./assets/images/wind.png" width="30%" height="30%" style="margin-left: 40px;">
+              </div> 
+              </div> 
+                feels like: -8<sup>°C</sup>
 
                  <!-- We need to show temperature detail like humidity, temp max, temp min, and wind speed here  --> 
                  <!-- Show main.temp_max, main.temp_min and wind.speed  --> 
-                <div id ="temp-detail">Weather Details </div>
+                <div id ="temp-detail"> 
+                  <span class="DetailTitle">OverCast</span><br>
+                  <table class="DetailTable" cellpadding="5px" cellspacing="10px">
+                    <tr>
+                      <td>Wind</td>
+                      <td>Humidity</td>
+                      <td>Visibility</td>
+                      <td>Sunrise</td>
+                    </tr>
+                    <tr>
+                      <td class="mainresults">4<sup>N</sup><sub>mph</sub></td>
+                      <td class="mainresults">93<sup>%</sup></td>
+                      <td class="mainresults">1.2<sup>Miles</sup></td>
+                      <td class="mainresults">7:50<sup>AM</sup></td>
+                    </tr>
+                      <tr>
+                        <td>Wind Gust</td>
+                        <td>Pressure</td>
+                        <td>Ceiling</td>
+                        <td>Sunset</td>
+                      </tr>
+                      <tr>
+                        <td class="mainresults">6<sup>mph</sup></td>
+                        <td class="mainresults">↓1000<sup>mb</sup></td>
+                        <td class="mainresults">69<sup>ft</sup></td>
+                        <td class="mainresults">4:58<sup>pm</sup></td>
+                      </tr>
+                    </table>
+                </div>
               </div>
 
               <!-- Location top stories detail goes here -->
               <div class="col-md-6">
-                <p>
+                <p class="TopStories">
+                  <font size=5>Top Story</font><br>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque dignissim, felis ut dictum tristique,
                   nibh erat feugiat libero, sit amet fringilla mauris velit in mi. Duis tempus felis vitae
                   felis vulputate pretium. Nullam commodo, est ac auctor ornare, eros nisi fringilla sem,
@@ -87,13 +120,15 @@
                   dolor et nisi venenatis, nec fermentum urna fringilla. Etiam efficitur porta purus, id
                   posuere sem congue a.
                 </p>
+                <img src="./assets/images/rain.png" align="left" height="150px;" style="margin-right:20px;">
+                <font color=#13aab0>Indoor Temperature:</font>-8<sup>°C</sup><br>
+                <font color=#13aab0>Target Temperature:</font>-8<sup>°C</sup>
               </div>
             </div>
           </div>
 
       <!-- Second Main Row -->
       <!--Create Card 1-->
-      <div class="row"></div>
             <div class="col-md-6">
               <div class="card mt-2">
                 <div class="card-body">
@@ -132,7 +167,7 @@
 
           <form role="form">
             <div class="form-group row">
-              <label for="name-input">Name:</label>
+              <label for="name-input">Name:</label><br>
               <input class="form-control" id="name-input" type="text">
             </div>
             <div class="form-group row">
@@ -174,10 +209,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <!-- Custom .js -->
-
-<script src="assets/javascript/code.js"></script>  
-=======
-
+<script src="Assets/javascript/code.js"></script>  
   
 </body>
 </html>
