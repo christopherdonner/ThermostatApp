@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +9,12 @@
 
   <!-- Bootstrap core CSS and Bootwatch theme -->
   <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
+
+  <!-- Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 
   <!-- Custom styles for this template -->
   <link href="./assets/css/styles.css" rel="stylesheet">
@@ -28,6 +33,7 @@
         <a href="#" class="navbar-brand d-flex align-items-center">
             <i class='fas fa-temperature-high' style='font-size:36px'></i>&nbsp;<strong>Nest Home Thermostat</strong>
         </a>
+        <!-- location drop down -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item dropdown">
@@ -37,12 +43,27 @@
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 
                   <!-- when the users submit their location add their location here -->
-                  <li class="user-location"></li>
+
+                  <li class="dropdown-item">Toronto</li>
+                  <li class="dropdown-item">Waterloo</li>
+                  <li class="dropdown-item">Kitchner</li>
+                  <li class="dropdown-item">Hamilton</li>
+                  <li class="dropdown-item">Markham</li>
+                  <li class="dropdown-item">North York</li>
                 </ul>
               </li>
             </ul>
           </div>
-          <div class="Units"><a href="#" id="Celcius" style="color:white;">°C</a> | <a href="#" id="Celcius" style="color:white;">°F</a></div>
+
+        <form class="css-3n5uzf">
+        <input type="search" id="locationSearch" placeholder="location" aria-label="Search docs" class="css-1wo8d34"> 
+        </form>
+        <!-- temperature buttons -->
+        <!-- use the id button to change the temperature -->
+          <div class="Units">
+          <a href="#" id="Celcius" style="color:white;">°C</a> | <a href="#" id="Celcius" style="color:white;">°F</a>
+          </div>
+
       </div>
     </nav>
   </header>
@@ -62,70 +83,52 @@
             </div>
 
             <div class="row">
-              <div class="col-md-6">
-                <!-- User temperature goes here        -->
+
+              <div class="col-md-4">
                 <!-- Show Open Weather API here        --> 
-                <!-- We need to show temperature       -->
-                <!-- Show main.temp                    -->
-                <div id ="user-temp"> </div>
-                <div>
-                <div id="user-temp"></div>-2<sup>°<span id="units"></span></sup><img src="./assets/images/wind.png" width="30%" height="30%" style="margin-left: 40px;">
-              </div> 
-              </div> 
-                feels like: -8<sup>°C</sup>
+
+
+                <div id ="user-temp"> </div> 
 
                  <!-- We need to show temperature detail like humidity, temp max, temp min, and wind speed here  --> 
                  <!-- Show main.temp_max, main.temp_min and wind.speed  --> 
-                <div id ="temp-detail"> 
-                  <span class="DetailTitle">OverCast</span><br>
-                  <table class="DetailTable" cellpadding="5px" cellspacing="10px">
-                    <tr>
-                      <td>Wind</td>
-                      <td>Humidity</td>
-                      <td>Visibility</td>
-                      <td>Sunrise</td>
-                    </tr>
-                    <tr>
-                      <td class="mainresults">4<sup>N</sup><sub>mph</sub></td>
-                      <td class="mainresults">93<sup>%</sup></td>
-                      <td class="mainresults">1.2<sup>Miles</sup></td>
-                      <td class="mainresults">7:50<sup>AM</sup></td>
-                    </tr>
-                      <tr>
-                        <td>Wind Gust</td>
-                        <td>Pressure</td>
-                        <td>Ceiling</td>
-                        <td>Sunset</td>
-                      </tr>
-                      <tr>
-                        <td class="mainresults">6<sup>mph</sup></td>
-                        <td class="mainresults">↓1000<sup>mb</sup></td>
-                        <td class="mainresults">69<sup>ft</sup></td>
-                        <td class="mainresults">4:58<sup>pm</sup></td>
-                      </tr>
-                    </table>
-                </div>
+                 <!-- We need to use jquery to create tables and populate the temperature detail into temp detail  --> 
+                <div id ="temp-detail"> </div>
+
               </div>
 
-              <!-- Location top stories detail goes here -->
-              <div class="col-md-6">
-                <p class="TopStories">
-                  <font size=5>Top Story</font><br>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque dignissim, felis ut dictum tristique,
-                  nibh erat feugiat libero, sit amet fringilla mauris velit in mi. Duis tempus felis vitae
-                  felis vulputate pretium. Nullam commodo, est ac auctor ornare, eros nisi fringilla sem,
-                  non pulvinar tortor lorem sit amet sem. Aenean quis erat facilisis, porttitor ex cursus,
-                  luctus enim. Curabitur et metus in lacus tristique sagittis et in lorem. Nunc id nisi et
-                  neque fringilla ultricies. Aenean at feugiat elit, a posuere justo. Pellentesque egestas
-                  dolor et nisi venenatis, nec fermentum urna fringilla. Etiam efficitur porta purus, id
-                  posuere sem congue a.
-                </p>
-                <img src="./assets/images/rain.png" align="left" height="150px;" style="margin-right:20px;">
-                <font color=#13aab0>Indoor Temperature:</font>-8<sup>°C</sup><br>
-                <font color=#13aab0>Target Temperature:</font>-8<sup>°C</sup>
+                <!-- indoor Nest temperature detail goes here -->
+                <div class="col-md-4">
+                  <div class="indoor-temp">
+                    <span style ="font-size:5">Nest Indoor Temperature</span><br>
+                   
+                  </div>
+                  <img src="assets/images/rain.png" align="left" height="150px;" style="margin-right:20px;">
+
+                  <!-- we need to use jquery to get the span id and populate the indoor temp here -->
+                  <span id="ambientTemp" style="color: #13aab0">Ambient temperature:</span>
+                  <span id="targetTemp" style="color:#13aab0">Target Temperature:</span>
+                  <span id="humidity" style="color: #13aab0">Humidity:</span>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="nestControl">
+                    <span style ="font-size:5">Nest Indoor Temperature Control</span><br>
+                    <p>You can change your indoor tempearature here</p>
+                  </div>
+                  <img src="assets/images/home.jpg" align="left" height="150px;" style="margin-right:20px;">
+
+                  <!-- we need to use jquery to get the button id and populate the indoor temp here -->
+                  <br>
+                  <button id="tempUp" style='font-size:24px'><i class='fas fa-arrow-circle-up'></i></button>
+                  <br>
+                  <br>
+                  <button id="tempDown" style='font-size:24px'><i class='fas fa-arrow-circle-down'></i></button>
+                
+                </div>
+
               </div>
             </div>
-          </div>
 
       <!-- Second Main Row -->
       <!--Create Card 1-->
