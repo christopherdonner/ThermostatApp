@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/christopherdonner/ThermostatApp/issues"
   },
-  "homepage": "https://github.com/christopherdonner/ThermostatApp#readme"
+  "homepage": "https://github.com/christopherdonner/ThermostatApp#readme",
+  "dependencies": {
+    "serve": "^10.1.1"
+  }
 }

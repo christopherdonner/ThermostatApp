@@ -3,13 +3,18 @@ var thermostat =
     ID: "uks8vKYvLFpURdo8n8GzwpNxir2Vn9sC",
     currentTemp: 0,
     targetTemp: 0,
+    tempArray:[],
     humidity: 0
 }
 
 var weather =
 {
     currentTemp: 0,
-    humidity: 0
+    humidity: 0,
+    windSpeed:0,
+    windDirection:0,
+    mainDescription: "",
+    detailedDescription: ""
 }
 
 var user =
@@ -17,7 +22,8 @@ var user =
     name: "",
     location: ""
 }
-var userLocation="Toronto"
+
+user.location="Toronto"
 
 var nestURL="https://developer-api.nest.com"
 var nestAuthToken="c.s7K5ndoFFMrwvCbFypU2U29sRxlTQZ4jSJTvWD6zHLOxuRJjznVkm38MJi204sQrJnFhvQn3pygTeoM8IFLpLZfQwSlXE47zzs6JrPzGHW3X4FRW0FqNlbOi9sUYeBfFMnLePx1Gjfqn8MgS"
@@ -27,19 +33,23 @@ var weatherKey="586717aa0716809b69e439ab59109b93"
 
 //draw thermostat temp table
 function drawThermostatData(){
-    $("#user-temp").text("")
-    $("#user-temp").append(`Indoor Temperature:${thermostat.currentTemp}<br>`)
-    $("#user-temp").append(`Target Temperature${thermostat.targetTemp}<br>`)
-    $("#user-temp").append(`Indoor Humidity: ${thermostat.humidity}`)
+    console.log("drawThermostat")
+    //$("#ambientTemp").text("")
+    $("#ambientTemp").text(`Indoor Temperature:${thermostat.currentTemp}`)
+    $("#targetTemp").text(`Target Temperature${thermostat.targetTemp}`)
+    $("#humidity").text(`Indoor Humidity: ${thermostat.humidity}`)
     }
 
 function drawWeatherData(){
+
     $("#temp-detail").text("")
-    $("#temp-detail").append(`<br>Outdoor Temperature: ${weather.currentTemp}<br>`)
-    $("#temp-detail").append(`Outdoor Humidity: ${weather.humidity}`)
+    $("#temp-detail").append(`${weather.mainDescription} - `)
+    $("#temp-detail").append(`${weather.detailedDescription}<br>`)
+    $("#temp-detail").append(`Outdoor Temperature: ${weather.currentTemp}<br>`)
+    $("#temp-detail").append(`Outdoor Humidity: ${weather.humidity}<br>`)
+    $("#temp-detail").append(`Air Pressure: ${weather.airPressure} mbar<br>`)
+    $("#temp-detail").append(`Wind Speed: ${weather.windSpeed}kts`)
 }
-
-
 
 // Initialize Firebase
 var config = {
@@ -57,6 +67,25 @@ var config = {
 //NEST thermostat API AJAX call 
 var NESTpoleInterval = setInterval(NESTPole(), 1000*60*5)
 
+//OpenWeather AJAX call
+function weatherPole(){
+    $.ajax({
+        url: `${weatherURL}q=${user.location}&appid=${weatherKey}`,
+        type: "GET"
+    }).then(function (response)
+    {
+        console.log(response)
+        weather.currentTemp=Math.floor(response.main.temp-273)
+        weather.humidity=response.main.humidity
+        weather.airPressure=response.main.pressure
+        weather.windSpeed=response.wind.speed
+        weather.windDirection=response.wind.direction
+        weather.mainDescription=response.weather[0].main
+        weather.detailedDescription=response.weather[0].description
+        drawWeatherData()
+    })
+    }
+
 function NESTPole(){
 $.ajax({
     url: `https://cors-escape.herokuapp.com/${nestURL}/?auth=${nestAuthToken}`,
@@ -64,59 +93,63 @@ $.ajax({
     contentType: "application/json",
     }).then(function (response)
     {
-        console.log(response)
         thermostat.currentTemp=response.devices.thermostats.uks8vKYvLFpURdo8n8GzwpNxir2Vn9sC.ambient_temperature_c;
         thermostat.targetTemp=response.devices.thermostats.uks8vKYvLFpURdo8n8GzwpNxir2Vn9sC.target_temperature_c
         thermostat.humidity=response.devices.thermostats.uks8vKYvLFpURdo8n8GzwpNxir2Vn9sC.humidity
-        console.log(thermostat.currentTemp)
-        console.log(thermostat.targetTemp)
-        console.log(thermostat.humidity)
         drawThermostatData()
+        weatherPole()
     })
     database.ref().push({
         currentTemp: thermostat.currentTemp,
         targetTemp: thermostat.targetTemp,
-        humidity: thermostat.humidity 
+        humidity: thermostat.humidity,
+        outdoorTemp: weather.currentTemp,
+        outdoorHumidity: weather.humidity,
+        //windSpeed: weather.windSpeed,
+        //airPressure: weather.airPressure
     })
 }
 
+
+
+
+function getLocation() {
+    var x = document.getElementById("mySelect").value;
+    document.getElementById("location").innerHTML = "You selected: " + x;
+   }
+
 NESTPole();
-//OpenWeather AJAX call
-$.ajax({
-    url: `${weatherURL}q=${userLocation}&appid=${weatherKey}`,
-    type: "GET"
-}).then(function (response)
-{
-    console.log(response)
-    console.log(response.main.temp)
-    weather.currentTemp=Math.floor(response.main.temp-273)
-    console.log(weather.currentTemp)
-    weather.humidity=response.main.humidity
-    drawWeatherData()
-})
+weatherPole();
 
-$("#submitButton").on("click", function(){
-
-    user.location=$("#location").val().trim()
-})
+$("#user-location").text(user.location)
 
 //thermostat up
-$("#thermostatUp").on("click", function(){
+$("#tempUp").on("click", function(){
+    thermostat.targetTemp+=0.5;
+    
     $.ajax({
-        url: `https://cors-escape.herokuapp.com/${nestURL}/devices/thermostats/uks8vKYvLFpURdo8n8GzwpNxir2Vn9sC/?auth=${nestAuthToken}`,
+        url: `https://cors-escape.herokuapp.com/${nestURL}/devices/thermostats/uks8vKYvLFpURdo8n8GzwpNxir2Vn9sC`,
         type: "PUT",
         contentType: "application/json",
-        data: {"target_temperature_c": 25}
-        }).then(function (response)
+        headers: {"Authorization": "Bearer c.s7K5ndoFFMrwvCbFypU2U29sRxlTQZ4jSJTvWD6zHLOxuRJjznVkm38MJi204sQrJnFhvQn3pygTeoM8IFLpLZfQwSlXE47zzs6JrPzGHW3X4FRW0FqNlbOi9sUYeBfFMnLePx1Gjfqn8MgS"},
+        data: JSON.stringify({"target_temperature_c": thermostat.targetTemp}),
+        }).then(function ()
         {
-            console.log(response)
-            thermostat.currentTemp=response.devices.thermostats.uks8vKYvLFpURdo8n8GzwpNxir2Vn9sC.ambient_temperature_c;
-            thermostat.targetTemp=response.devices.thermostats.uks8vKYvLFpURdo8n8GzwpNxir2Vn9sC.target_temperature_c
-            thermostat.humidity=response.devices.thermostats.uks8vKYvLFpURdo8n8GzwpNxir2Vn9sC.humidity
-            console.log(thermostat.currentTemp)
-            console.log(thermostat.targetTemp)
-            console.log(thermostat.humidity)
             drawThermostatData()
         })
+})
+
+$("#tempDown").on("click", function(){
+    thermostat.targetTemp-=0.5;
     
+    $.ajax({
+        url: `https://cors-escape.herokuapp.com/${nestURL}/devices/thermostats/uks8vKYvLFpURdo8n8GzwpNxir2Vn9sC`,
+        type: "PUT",
+        contentType: "application/json",
+        headers: {"Authorization": "Bearer c.s7K5ndoFFMrwvCbFypU2U29sRxlTQZ4jSJTvWD6zHLOxuRJjznVkm38MJi204sQrJnFhvQn3pygTeoM8IFLpLZfQwSlXE47zzs6JrPzGHW3X4FRW0FqNlbOi9sUYeBfFMnLePx1Gjfqn8MgS"},
+        data: JSON.stringify({"target_temperature_c": thermostat.targetTemp}),
+        }).then(function ()
+        {
+            drawThermostatData()
+        })
 })
