@@ -93,7 +93,9 @@
                  <!-- We need to show temperature detail like humidity, temp max, temp min, and wind speed here  --> 
                  <!-- Show main.temp_max, main.temp_min and wind.speed  --> 
                  <!-- We need to use jquery to create tables and populate the temperature detail into temp detail  --> 
-                <div id ="temp-detail"> </div>
+                <div id ="temp-detail">
+                .
+                </div>
 
               </div>
 
@@ -106,9 +108,9 @@
                   <img src="assets/images/rain.png" align="left" height="150px;" style="margin-right:20px;">
 
                   <!-- we need to use jquery to get the span id and populate the indoor temp here -->
-                  <span id="ambientTemp" style="color: #13aab0">Ambient temperature:</span>
-                  <span id="targetTemp" style="color:#13aab0">Target Temperature:</span>
-                  <span id="humidity" style="color: #13aab0">Humidity:</span>
+                  <p><span id="ambientTemp" style="color: #13aab0">Ambient temperature:</span></p>
+                  <p></p><span id="targetTemp" style="color:#13aab0">Target Temperature:</span></p>
+                  <p><span id="humidity" style="color: #13aab0">Humidity:</span></p>
                 </div>
 
                 <div class="col-md-4">
@@ -117,7 +119,6 @@
                     <p>You can change your indoor tempearature here</p>
                   </div>
                   <img src="assets/images/home.jpg" align="left" height="150px;" style="margin-right:20px;">
-
                   <!-- we need to use jquery to get the button id and populate the indoor temp here -->
                   <br>
                   <button id="tempUp" style='font-size:24px'><i class='fas fa-arrow-circle-up'></i></button>
@@ -132,15 +133,10 @@
 
       <!-- Second Main Row -->
       <!--Create Card 1-->
-            <div class="col-md-6">
-              <div class="card mt-2">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              </div>
-            </div>
-          </div>
+      <div class="col-md-6">
+          <canvas id="tempChart" width="400" height="200"></canvas>
+              
+        </div>
 
           <!--Create Card 2-->
             <div class="col-md-6">
@@ -158,59 +154,12 @@
   <br>  
   <div class="row">
 
-    <!-- Sign-Up Card-->
-    <div class="col-lg-6">
-      <div class="card card-default">
-
-        <div class="card-header"> New Member Sign-Up</div>
-
-        <div class="card-body">
-
-          <!-- Sign-up Form (note the various input "types")-->
-
-          <form role="form">
-            <div class="form-group row">
-              <label for="name-input">Name:</label><br>
-              <input class="form-control" id="name-input" type="text">
-            </div>
-            <div class="form-group row">
-              <label for="location-input">Location</label>
-              <input class="form-control" id="email-input" type="email">
-            </div>
-            <div class="form-group row">
-              <label for="temperature-input">Select your desire temperature: </label>
-              <input id="temp-input" type="radio" value="Celcius">Celcius <br>
-              <input id="temp-input" type="radio" value="Fahrenheit">Fahrenheit
-            </div>
-            <div class="form-group row">
-              <label for="comment-input">How did you hear about us?</label>
-              <textarea class="form-control" rows="5" id="comment-input"></textarea>
-            </div>
-            <button class="btn btn-default" id="add-user" type="submit">Submit</button>
-          </form>
-        </div>
-      </div>
-    </div>
-      <!-- Most Recent Member Card -->
-      <div class="col-lg-6">
-          <div class="card card-default">
-            <div class="card-header">Most Recent Member</div>
-              <div class="card-body" id="recent-member">
-                <h2 id="name-display"></h2>
-                <h4 id="email-display"></h4>
-                <h4 id="age-display"></h4>
-                <p id="comment-display"></p>
-              </div>
-            </div>
-      </div>
-  
-  </div>
-  
 
 
 <!-- JQuery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+<!--Chart.js-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 <!-- Custom .js -->
 <script src="./assets/javascript/code.js"></script>  
   
