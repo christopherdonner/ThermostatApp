@@ -29,19 +29,6 @@
   width:700px;
 }
 
-
-#TopStories {
-  width:700px;
-}
 .row {
   width:1000px;
-}
-
-.TopStories {
-  display: inline-block;
-  background:#6fd1d4;
-  width:100%;
-  padding: 10px;
-  border-radius: 5px;
-  background: url(../../storybg.png) no-repeat 180px 80px;
 }
