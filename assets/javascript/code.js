@@ -224,7 +224,7 @@ function drawOutdoorTemperatureChart() {
                     'rgba(65,105,225, 0.2)'
                 ],
                 borderColor: [
-                    'rgba(255,99,132,1)'
+                    'rgba(0,0,255,1)'
                 ],
                 borderWidth: 1
             }]
