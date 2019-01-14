@@ -15,16 +15,15 @@ var weather =
     windDirection: 0,
     mainDescription: "",
     detailedDescription: "",
-    tempArray:[]
+    tempArray: []
 }
 
 var user =
 {
     name: "",
-    location: ""
+    location: "Toronto"
 }
 
-user.location = "Toronto"
 
 var nestURL = "https://developer-api.nest.com"
 var nestAuthToken = "c.s7K5ndoFFMrwvCbFypU2U29sRxlTQZ4jSJTvWD6zHLOxuRJjznVkm38MJi204sQrJnFhvQn3pygTeoM8IFLpLZfQwSlXE47zzs6JrPzGHW3X4FRW0FqNlbOi9sUYeBfFMnLePx1Gjfqn8MgS"
@@ -38,10 +37,9 @@ thermostat.tempArray = [] //this is for the chart of historical internal tempera
 
 //draw thermostat temp table
 function drawThermostatData() {
-    console.log("drawThermostat")
     //$("#ambientTemp").text("")
     $("#ambientTemp").text(`Indoor Temperature:${thermostat.currentTemp}`)
-    $("#targetTemp").text(`Target Temperature${thermostat.targetTemp}`)
+    $("#targetTemp").text(`Target Temperature: ${thermostat.targetTemp}`)
     $("#humidity").text(`Indoor Humidity: ${thermostat.humidity}`)
     $("#thermostatDisplay").text(`${thermostat.currentTemp}`)
 }
@@ -49,6 +47,7 @@ function drawThermostatData() {
 function drawWeatherData() {
 
     $("#temp-detail").text("")
+    $("#user-location").text(user.location)
     $("#temp-detail").append(`${weather.mainDescription} - `)
     $("#temp-detail").append(`${weather.detailedDescription}<br>`)
     $("#temp-detail").append(`Outdoor Temperature: ${weather.currentTemp}<br>`)
@@ -74,12 +73,12 @@ var database = firebase.database();
 database.ref().on("child_added", function (childSnapshot) {
     thermostat.tempArray.push(childSnapshot.val().targetTemp)
     weather.tempArray.push(childSnapshot.val().outdoorTemp)
-    console.log(thermostat.tempArray)
     drawIndoorTemperatureChart()
     drawOutdoorTemperatureChart()
 })
 //NEST thermostat API AJAX call 
 var NESTPollInterval = setInterval(NESTPoll(), 1000 * 60 * 5)
+var WeatherPollInterval = setInterval(weatherPoll(), 1000 * 60 *5)
 
 //OpenWeather AJAX call
 function weatherPoll() {
@@ -87,7 +86,6 @@ function weatherPoll() {
         url: `${weatherURL}q=${user.location}&appid=${weatherKey}`,
         type: "GET"
     }).then(function (response) {
-        console.log(response)
         weather.currentTemp = Math.floor(response.main.temp - 273)
         weather.humidity = response.main.humidity
         weather.airPressure = response.main.pressure
@@ -110,9 +108,7 @@ function NESTPoll() {
         thermostat.humidity = response.devices.thermostats.uks8vKYvLFpURdo8n8GzwpNxir2Vn9sC.humidity
         drawThermostatData()
         weatherPoll()
-        console.log(thermostat.currentTemp, thermostat.targetTemp)
 
-        console.log(thermostat.currentTemp, thermostat.targetTemp)
         database.ref().push({
             currentTemp: thermostat.currentTemp,
             targetTemp: thermostat.targetTemp,
@@ -129,44 +125,51 @@ function NESTPoll() {
 NESTPoll();
 weatherPoll();
 
-$("#user-location").text(user.location)
+
 
 //thermostat up
-$("#tempUp").on("click", function () {
+$("#tempUp").on("click", function () 
+{
+    if(thermostat.targetTemp < 32)
+    {
     thermostat.targetTemp += 0.5;
     drawThermostatData();
-    $.ajax({
+    $.ajax(
+        {
         url: `https://cors-escape.herokuapp.com/${nestURL}/devices/thermostats/uks8vKYvLFpURdo8n8GzwpNxir2Vn9sC`,
         type: "PUT",
         contentType: "application/json",
         headers: { "Authorization": "Bearer c.s7K5ndoFFMrwvCbFypU2U29sRxlTQZ4jSJTvWD6zHLOxuRJjznVkm38MJi204sQrJnFhvQn3pygTeoM8IFLpLZfQwSlXE47zzs6JrPzGHW3X4FRW0FqNlbOi9sUYeBfFMnLePx1Gjfqn8MgS" },
         data: JSON.stringify({ "target_temperature_c": thermostat.targetTemp }),
-    }).then(function () {
+        }).then(function () 
+        {
         //drawThermostatData()
-    })
+        })
+    }
 })
 
 $("#tempDown").on("click", function () {
-    thermostat.targetTemp -= 0.5;
-    drawThermostatData();
-    $.ajax({
-        url: `https://cors-escape.herokuapp.com/${nestURL}/devices/thermostats/uks8vKYvLFpURdo8n8GzwpNxir2Vn9sC`,
-        type: "PUT",
-        contentType: "application/json",
-        headers: { "Authorization": "Bearer c.s7K5ndoFFMrwvCbFypU2U29sRxlTQZ4jSJTvWD6zHLOxuRJjznVkm38MJi204sQrJnFhvQn3pygTeoM8IFLpLZfQwSlXE47zzs6JrPzGHW3X4FRW0FqNlbOi9sUYeBfFMnLePx1Gjfqn8MgS" },
-        data: JSON.stringify({ "target_temperature_c": thermostat.targetTemp }),
-    }).then(function () {
-        //drawThermostatData()
+    if (thermostat.targetTemp > 9) {
+        thermostat.targetTemp -= 0.5;
+        drawThermostatData();
+        $.ajax(
+            {
+                url: `https://cors-escape.herokuapp.com/${nestURL}/devices/thermostats/uks8vKYvLFpURdo8n8GzwpNxir2Vn9sC`,
+                type: "PUT",
+                contentType: "application/json",
+                headers: { "Authorization": "Bearer c.s7K5ndoFFMrwvCbFypU2U29sRxlTQZ4jSJTvWD6zHLOxuRJjznVkm38MJi204sQrJnFhvQn3pygTeoM8IFLpLZfQwSlXE47zzs6JrPzGHW3X4FRW0FqNlbOi9sUYeBfFMnLePx1Gjfqn8MgS" },
+                data: JSON.stringify({ "target_temperature_c": thermostat.targetTemp }),
+            }).then(function () {
+                //drawThermostatData()
+            })
+        }
     })
-})
 
 function drawIndoorTemperatureChart() {
     //draw chart
     //var ctx = document.getElementById("tempChart").getContext('2d');
     var ctx = $("#tempChart");
-    var chartArray = thermostat.tempArray.slice(thermostat.tempArray.length-100, thermostat.tempArray.length)
-    console.log(thermostat.tempArray)
-    console.log(chartArray)
+    var chartArray = thermostat.tempArray.slice(thermostat.tempArray.length - 6, thermostat.tempArray.length)
     //console.log(thermostat.tempArray.slice(0,5))
     var myChart = new Chart(ctx, {
         type: 'line',
@@ -178,19 +181,9 @@ function drawIndoorTemperatureChart() {
                 //thermostat.tempArray.slice(0,1,2,3,4,5),
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
-                    /*'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'*/
                 ],
                 borderColor: [
                     'rgba(255,99,132,1)',
-                    /*'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'*/
                 ],
                 borderWidth: 1
             }]
@@ -209,11 +202,8 @@ function drawIndoorTemperatureChart() {
 
 function drawOutdoorTemperatureChart() {
     //draw chart
-    //var ctx = document.getElementById("tempChart").getContext('2d');
     var ctx = $("#outdoorTempChart");
-    var chartArray = weather.tempArray.slice(weather.tempArray.length-100, weather.tempArray.length)
-    console.log(weather.tempArray)
-    console.log(chartArray)
+    var chartArray = weather.tempArray.slice(weather.tempArray.length - 6, weather.tempArray.length)
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -233,10 +223,18 @@ function drawOutdoorTemperatureChart() {
             scales: {
                 yAxes: [{
                     ticks: {
-                        //beginAtZero: true
+                        beginAtZero: true
                     }
                 }]
             }
         }
     });
 }
+
+$("#searchButton").on("click", function () {
+    event.preventDefault();
+    user.location = $("#location-search").val().trim().toLowerCase()
+    console.log(`user.location: ${user.location}`)
+    $("#user-location").text(user.location)
+    weatherPoll()
+})
