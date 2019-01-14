@@ -86,6 +86,7 @@ function weatherPoll() {
         url: `${weatherURL}q=${user.location}&appid=${weatherKey}`,
         type: "GET"
     }).then(function (response) {
+        console.log(response)
         weather.currentTemp = Math.floor(response.main.temp - 273)
         weather.humidity = response.main.humidity
         weather.airPressure = response.main.pressure
@@ -169,7 +170,7 @@ function drawIndoorTemperatureChart() {
     //draw chart
     //var ctx = document.getElementById("tempChart").getContext('2d');
     var ctx = $("#tempChart");
-    var chartArray = thermostat.tempArray.slice(thermostat.tempArray.length - 6, thermostat.tempArray.length)
+    //var chartArray = thermostat.tempArray.slice(thermostat.tempArray.length - 6, thermostat.tempArray.length)
     //console.log(thermostat.tempArray.slice(0,5))
     var myChart = new Chart(ctx, {
         type: 'line',
@@ -177,7 +178,7 @@ function drawIndoorTemperatureChart() {
             //labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
             datasets: [{
                 label: 'thermostat target history:',
-                data: chartArray,
+                data: thermostat.tempArray.slice(thermostat.tempArray.length - 6, thermostat.tempArray.length),
                 //thermostat.tempArray.slice(0,1,2,3,4,5),
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
@@ -190,9 +191,13 @@ function drawIndoorTemperatureChart() {
         },
         options: {
             scales: {
+                scaleStepWidth: 1,
+                //scaleSteps: 6,
+                scaleOverride: true,
+
                 yAxes: [{
                     ticks: {
-                        beginAtZero: true
+                        beginAtZero: true,
                     }
                 }]
             }
@@ -201,29 +206,36 @@ function drawIndoorTemperatureChart() {
 }
 
 function drawOutdoorTemperatureChart() {
+    console.log(weather.tempArray.slice(weather.tempArray.length - 100, weather.tempArray.length))
     //draw chart
     var ctx = $("#outdoorTempChart");
-    var chartArray = weather.tempArray.slice(weather.tempArray.length - 6, weather.tempArray.length)
+    //var chartArray = weather.tempArray.slice(weather.tempArray.length - 6, weather.tempArray.length)
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
             datasets: [{
                 label: 'outdoor temperature history:',
-                data: chartArray,
+                data: weather.tempArray.slice(weather.tempArray.length - 6, weather.tempArray.length),
                 backgroundColor: [
                     'rgba(65,105,225, 0.2)'
                 ],
                 borderColor: [
                     'rgba(0,0,255,1)'
                 ],
-                borderWidth: 1
+                borderWidth: 1,
+                pointColor : 'rgba(0,0,0,1)',
+                pointStrokeColor : '#fff',
             }]
         },
         options: {
             scales: {
+                scaleStepWidth: 1,
+                scaleSteps: 6,
+                scaleOverride: true,
+
                 yAxes: [{
                     ticks: {
-                        beginAtZero: true
+                        beginAtZero: true,
                     }
                 }]
             }
@@ -234,7 +246,9 @@ function drawOutdoorTemperatureChart() {
 $("#searchButton").on("click", function () {
     event.preventDefault();
     user.location = $("#location-search").val().trim().toLowerCase()
-    console.log(`user.location: ${user.location}`)
+    $("#location-search").text("")
     $("#user-location").text(user.location)
+    $("#location-search").val("")
     weatherPoll()
+    NESTPoll()
 })
