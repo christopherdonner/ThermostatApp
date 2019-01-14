@@ -8,19 +8,16 @@
   <title>Nest Thermostat</title>
 
   <!-- Bootstrap core CSS and Bootwatch theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- Bootstrap core CSS and Bootwatch theme -->
   <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
 
-  <!-- Bootstrap -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-
   <!-- Custom styles for this template -->
+  <link href="./assets/css/reset.css" rel="stylesheet">
   <link href="./assets/css/styles.css" rel="stylesheet">
   
   <!-- Firebase Reference -->
-  <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
 </head>
 <body>
 
@@ -29,40 +26,30 @@
   <!-- Header Section -->
   <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container d-flex justify-content-between">
-        <a href="#" class="navbar-brand d-flex align-items-center">
-            <i class='fas fa-temperature-high' style='font-size:36px'></i>&nbsp;<strong>Nest Home Thermostat</strong>
-        </a>
-        <!-- location drop down -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Locations
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <div class="container-fluid d-flex justify-content-between">
+          <div class="navbar-header">
+               
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+              
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a href="#" class="navbar-brand d-flex align-items-center">
+                            <i class='fas fa-temperature-high' style='font-size:36px'></i>&nbsp;<strong>Nest Home Thermostat</strong>
+                            </a>
+                    </li>
+           
+                  </ul>
 
-                  <!-- when the users submit their location add their location here -->
-
-                  <li class="dropdown-item">Toronto</li>
-                  <li class="dropdown-item">Waterloo</li>
-                  <li class="dropdown-item">Kitchner</li>
-                  <li class="dropdown-item">Hamilton</li>
-                  <li class="dropdown-item">Markham</li>
-                  <li class="dropdown-item">North York</li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-
-        <form class="css-3n5uzf">
-        <input type="search" id="locationSearch" placeholder="location" aria-label="Search docs" class="css-1wo8d34" style="padding:4px;margin:4px">
-        </form>
-        <!-- temperature buttons -->
-        <!-- use the id button to change the temperature -->
-          <div class="Units">
-          <a href="#" id="Celcius" style="color:white;">°C</a> | <a href="#" id="Celcius" style="color:white;">°F</a>
-          </div>
+                  <!-- location search box -->
+                  <form id="location" class="form-inline my-2 my-lg-0">
+                    <input id="location-search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button id="searchButton" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                  </form>
+                </div>
+              </nav>
 
       </div>
     </nav>
@@ -77,9 +64,7 @@
             <div class="page-header">
 
             <!-- User Location detail goes here -->
-              <h1 id="user-location">
-                Waterloo, On, Canada
-              </h1>
+              <h1 id="user-location"></h1>
             </div>
 
             <div class="row">
@@ -106,7 +91,7 @@
                     <span style ="font-size:5">Nest Indoor Temperature</span><br>
                    
                   </div>
-                  <img src="assets/images/rain.png" align="left" height="150px;" style="margin-right:20px;">
+                  <img src="assets/images/indoor.JPG" align="left" height="150px;" style="margin-right:20px;">
 
                   <!-- we need to use jquery to get the span id and populate the indoor temp here -->
                   <p><span id="ambientTemp" style="color: #13aab0">Ambient temperature:</span></p>
