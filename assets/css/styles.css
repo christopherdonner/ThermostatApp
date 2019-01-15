@@ -3,25 +3,6 @@ body {
   height: 100%;
 }
 
-#masthead {
-  position: fixed;
-  z-index: 99;
-
-  /* Box-model */
-  width: 100%;
-
-  /* Positioning */
-  margin: 0 0 30px;
-  overflow: auto;
-
-  /* Typography */
-  color: #fff;
-  background: #fff;
-
-  /* Visual */
-  border-bottom: 2px solid #ccc;
-}
-
 body {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   font-size: 18px;
