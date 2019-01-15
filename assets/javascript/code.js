@@ -148,7 +148,7 @@ $("#tempUp").on("click", function ()
 {
     if(thermostat.targetTemp < 32)
     {
-    thermostat.targetTemp += 0.5;
+    thermostat.targetTemp ++;
     drawThermostatData();
     $.ajax(
         {
@@ -165,7 +165,7 @@ $("#tempUp").on("click", function ()
 
 $("#tempDown").on("click", function () {
     if (thermostat.targetTemp > 9) {
-        thermostat.targetTemp -= 0.5;
+        thermostat.targetTemp --;
         drawThermostatData();
         $.ajax(
             {
