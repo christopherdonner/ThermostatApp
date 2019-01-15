@@ -42,7 +42,7 @@ function drawThermostatData() {
     $("#ambientTemp").text(`Indoor Temperature:${thermostat.currentTemp}`)
     $("#targetTemp").text(`Target Temperature: ${thermostat.targetTemp}`)
     $("#humidity").text(`Indoor Humidity: ${thermostat.humidity}`)
-    $("#thermostatDisplay").text(`${thermostat.currentTemp}`)
+    $("#thermostatDisplay").text(`${thermostat.targetTemp}`)
 }
 
 function drawWeatherData() {
