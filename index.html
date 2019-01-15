@@ -12,6 +12,7 @@
   <!-- Bootstrap core CSS and Bootwatch theme -->
   <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
 
+
   <!-- Custom styles for this template -->
   <link href="./assets/css/reset.css" rel="stylesheet">
   <link href="./assets/css/styles.css" rel="stylesheet">
@@ -60,54 +61,56 @@
       <!-- Temperature Detail goes here -->
       <!-- First Main Row -->
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-lg-12">
             <div class="page-header">
 
             <!-- User Location detail goes here -->
-              <h1 id="user-location"></h1>
+              <h1><span id="user-location"></h1>
             </div>
-
+            
+            <p>The Nest Thermostat is one of the most popular home thermostats on the market today.</p>
+            <p>You can enter your location and view your outdoor temperature.</p>
+            <p>And, you can use our Nest Indoor Tempeature Control to change your indoor temperature.</p>
             <div class="row">
-
+            <br>
               <div class="col-md-4">
                 <!-- Show Open Weather API here        --> 
 
-
                 <div id="outdoorTemp"></div>
-                <div id="weatherDescription"></div>
-                <div id ="user-temp"> </div> 
-                 <!-- We need to show temperature detail like humidity, temp max, temp min, and wind speed here  --> 
-                 <!-- Show main.temp_max, main.temp_min and wind.speed  --> 
-                 <!-- We need to use jquery to create tables and populate the temperature detail into temp detail  --> 
-                <div id ="temp-detail">
-                .
-                </div>
-
+                <h2>Weather Description</h2>
+               
+                    <!-- We need to show temperature detail like humidity, temp max, temp min, and wind speed here  --> 
+                    <!-- Show main.temp_max, main.temp_min and wind.speed  --> 
+                    <!-- We need to use jquery to create tables and populate the temperature detail into temp detail  --> 
+                    <span id ="temp-detail" class="user-temp" style="color: #13aab0"></span>
+                
               </div>
 
                 <!-- indoor Nest temperature detail goes here -->
-                <div class="col-md-4">
+                <div class="col-md-5">
                   <div class="indoor-temp">
-                    <span style ="font-size:5">Nest Indoor Temperature</span><br>
-                   
+                    <h2><span style ="font-size:5">Nest Indoor Temperature</span></h2>
+                                   
                   </div>
                   <img src="assets/images/indoor.JPG" align="left" height="150px;" style="margin-right:20px;">
 
                   <!-- we need to use jquery to get the span id and populate the indoor temp here -->
-                  <p><span id="ambientTemp" style="color: #13aab0">Ambient temperature:</span></p>
-                  <p></p><span id="targetTemp" style="color:#13aab0">Target Temperature:</span></p>
-                  <p><span id="humidity" style="color: #13aab0">Humidity:</span></p>
+                  <p><span id="ambientTemp" class="mainresults">Ambient temperature:</span></p>
+                  <p><span id="targetTemp" class="mainresults">Target Temperature:</span></p>
+                  <p><span id="humidity" class="mainresults">Humidity:</span></p>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <div class="nestControl">
-                    <span style ="font-size:5">Nest Indoor Temperature Control</span><br>
-                    <p>You can change your indoor tempearature here</p>
+                    <h2><span style ="font-size:5">Temperature Control</span></h2>
+                 
                   </div>
-                  <img src="assets/images/home.jpg" align="left" height="150px;" style="margin-right:20px;">
+                   <!-- we need to use jquery to get the button id and populate the indoor temp here -->
+                   <span id="temperature" class="current-temp"></span>
+                  <img src="assets/images/home.jpg" align="left" height="150px;" class= "thermostatImage" style="margin-right:20px;">
+            
                   <!-- we need to use jquery to get the button id and populate the indoor temp here -->
-                  <br>
-                  <button id="tempUp" style='font-size:24px'><i class='fas fa-arrow-circle-up'></i></button>
+                                    <button id="tempUp" style='font-size:24px'><i class='fas fa-arrow-circle-up'></i></button>
                   <br>
                   <br>
                   <button id="tempDown" style='font-size:24px'><i class='fas fa-arrow-circle-down'></i></button>
