@@ -16,6 +16,20 @@ body {
   clear: both;
 }
 
+.thermostatImage {
+  left: 0px;
+  top: 0px;
+  z-index: -1;
+}
+
+.current-temp {
+  position: absolute;
+  font-size: 20pt;
+  color:#13aab0;
+  top: 145px;
+  left: 72px;
+}
+
 #user-temp {
   font-size: 60pt;
   color:#13aab0;
