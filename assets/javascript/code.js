@@ -33,6 +33,9 @@ var weatherKey = "586717aa0716809b69e439ab59109b93"
 
 thermostat.tempArray = [] //this is for the chart of historical internal temperatures
 
+//localStorage.clear();
+
+user.location=localStorage.getItem("location");
 //draw thermostat temp table
 function drawThermostatData() {
     //$("#ambientTemp").text("")
@@ -121,7 +124,7 @@ function NESTPoll() {
         thermostat.humidity = response.devices.thermostats.uks8vKYvLFpURdo8n8GzwpNxir2Vn9sC.humidity
         drawThermostatData()
         weatherPoll()
-
+        localStorage.setItem("location", user.location);
         database.ref().push({
             currentTemp: thermostat.currentTemp,
             targetTemp: thermostat.targetTemp,
