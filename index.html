@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head id="masthead">
   <meta charset="UTF-8">
-  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.5.0/css/all.css' integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU' crossorigin='anonymous'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Nest Thermostat</title>
 
-  <!-- Bootstrap core CSS and Bootwatch theme -->
+  <!-- Bootstrap core CSS, Bootwatch theme, & fontawesome -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <!-- Bootstrap core CSS and Bootwatch theme -->
   <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
-
-
+  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.5.0/css/all.css' integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU' crossorigin='anonymous'>
+  
   <!-- Custom styles for this template -->
   <link href="./assets/css/reset.css" rel="stylesheet">
   <link href="./assets/css/styles.css" rel="stylesheet">
@@ -23,7 +22,7 @@
 <body>
 
 <main role="main">
-
+  
   <!-- Header Section -->
   <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -55,7 +54,7 @@
       </div>
     </nav>
   </header>
-  
+
   <div class="container">
     <br>
       <!-- Temperature Detail goes here -->
@@ -65,15 +64,17 @@
             <div class="page-header">
 
             <!-- User Location detail goes here -->
-              <h1><span id="user-location"></h1>
+            <h1><span id="user-location"></h1>
             </div>
             
-            <p>The Nest Thermostat is one of the most popular home thermostats on the market today.</p>
-            <p>You can enter your location and view your outdoor temperature.</p>
-            <p>And, you can use our Nest Indoor Tempeature Control to change your indoor temperature.</p>
+            <p class="main-section">The Nest Thermostat is one of the most popular home thermostats on the market today.</p>
+            <p class="main-section">You can enter your location in the search box above and view your outdoor temperature.</p>
+            <p class="main-section">And, you can use our Nest Indoor Tempeature Control to change your indoor temperature.</p>
+
             <div class="row">
             <br>
               <div class="col-md-4">
+
                 <!-- Show Open Weather API here        --> 
 
                 <div id="outdoorTemp"></div>
@@ -92,7 +93,7 @@
                     <h2><span style ="font-size:5">Nest Indoor Temperature</span></h2>
                                    
                   </div>
-                  <img src="assets/images/indoor.JPG" align="left" height="150px;" style="margin-right:20px;">
+                  <img src="assets/images/indoor.JPG" align="left" height="150px;" style="margin-right:20px;" alt="Nest Home">
 
                   <!-- we need to use jquery to get the span id and populate the indoor temp here -->
                   <p><span id="ambientTemp" class="mainresults">Ambient temperature:</span></p>
@@ -107,7 +108,7 @@
                   </div>
                    <!-- we need to use jquery to get the button id and populate the indoor temp here -->
                    <span id="thermostatDisplay" class="current-temp"></span>
-                  <img src="assets/images/home.jpg" align="left" height="150px;" class= "thermostatImage" style="margin-right:20px;">
+                   <img src="assets/images/home.jpg" align="left" height="150px;" class= "thermostatImage" style="margin-right:20px;" alt="Indoor Thermostat">
             
                   <!-- we need to use jquery to get the button id and populate the indoor temp here -->
                                     <button id="tempUp" style='font-size:24px'><i class='fas fa-arrow-circle-up'></i></button>
@@ -123,13 +124,13 @@
       <!-- Second Main Row -->
       <!--Create Card 1-->
       <div class="col-md-6">
-          <canvas id="tempChart" width="400" height="200"></canvas>
+          <canvas id="tempChart" width="400" height="200" class="chart"></canvas>
               
         </div>
 
           <!--Create Card 2-->
             <div class="col-md-6">
-                <canvas id="outdoorTempChart" width="400" height="200"></canvas>
+                <canvas id="outdoorTempChart" width="400" height="200" class="chart"></canvas>
                 
               </div>
           </div>
