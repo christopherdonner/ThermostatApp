@@ -31,8 +31,6 @@ var nestAuthToken = "c.s7K5ndoFFMrwvCbFypU2U29sRxlTQZ4jSJTvWD6zHLOxuRJjznVkm38MJ
 var weatherURL = "https://api.openweathermap.org/data/2.5/weather?"
 var weatherKey = "586717aa0716809b69e439ab59109b93"
 
-var chartTestArray = [1, 4, 3, 2, 5, 6,]
-
 thermostat.tempArray = [] //this is for the chart of historical internal temperatures
 
 //draw thermostat temp table
@@ -73,6 +71,8 @@ var database = firebase.database();
 database.ref().on("child_added", function (childSnapshot) {
     thermostat.tempArray.push(childSnapshot.val().targetTemp)
     weather.tempArray.push(childSnapshot.val().outdoorTemp)
+    console.log(thermostat.tempArray.slice(thermostat.tempArray.length - 7, thermostat.tempArray.length))
+    console.log(weather.tempArray.slice(weather.tempArray.length - 7, weather.tempArray.length-1))
     drawIndoorTemperatureChart()
     drawOutdoorTemperatureChart()
 })
@@ -81,12 +81,13 @@ var NESTPollInterval = setInterval(NESTPoll(), 1000 * 60 * 5)
 var WeatherPollInterval = setInterval(weatherPoll(), 1000 * 60 *5)
 
 //OpenWeather AJAX call
-function weatherPoll() {
-    $.ajax({
+function weatherPoll() 
+{
+    $.ajax
+    ({
         url: `${weatherURL}q=${user.location}&appid=${weatherKey}`,
-        type: "GET"
-    }).then(function (response) {
-        console.log(response)
+        type: "GET",
+       success:function (response) {
         weather.currentTemp = Math.floor(response.main.temp - 273)
         weather.humidity = response.main.humidity
         weather.airPressure = response.main.pressure
@@ -95,6 +96,17 @@ function weatherPoll() {
         weather.mainDescription = response.weather[0].main
         weather.detailedDescription = response.weather[0].description
         drawWeatherData()
+        },
+        error: function (xhr, ajaxOptions, thrownError)
+        {
+            if(xhr.status==404) 
+            {
+                $("#location-search").val("Invalid city")
+                $("#user-location").text(thrownError)
+                $("#temp-detail").text("")
+                var errorTimeout=setTimeout(function(){$("#location-search").val(""), 3000})
+            }
+        }
     })
 }
 
@@ -124,7 +136,7 @@ function NESTPoll() {
 
 
 NESTPoll();
-weatherPoll();
+//weatherPoll();
 
 
 
@@ -144,7 +156,6 @@ $("#tempUp").on("click", function ()
         data: JSON.stringify({ "target_temperature_c": thermostat.targetTemp }),
         }).then(function () 
         {
-        //drawThermostatData()
         })
     }
 })
@@ -161,25 +172,19 @@ $("#tempDown").on("click", function () {
                 headers: { "Authorization": "Bearer c.s7K5ndoFFMrwvCbFypU2U29sRxlTQZ4jSJTvWD6zHLOxuRJjznVkm38MJi204sQrJnFhvQn3pygTeoM8IFLpLZfQwSlXE47zzs6JrPzGHW3X4FRW0FqNlbOi9sUYeBfFMnLePx1Gjfqn8MgS" },
                 data: JSON.stringify({ "target_temperature_c": thermostat.targetTemp }),
             }).then(function () {
-                //drawThermostatData()
             })
         }
     })
 
 function drawIndoorTemperatureChart() {
     //draw chart
-    //var ctx = document.getElementById("tempChart").getContext('2d');
     var ctx = $("#tempChart");
-    //var chartArray = thermostat.tempArray.slice(thermostat.tempArray.length - 6, thermostat.tempArray.length)
-    //console.log(thermostat.tempArray.slice(0,5))
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            //labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
             datasets: [{
                 label: 'thermostat target history:',
                 data: thermostat.tempArray.slice(thermostat.tempArray.length - 6, thermostat.tempArray.length),
-                //thermostat.tempArray.slice(0,1,2,3,4,5),
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                 ],
@@ -191,10 +196,6 @@ function drawIndoorTemperatureChart() {
         },
         options: {
             scales: {
-                scaleStepWidth: 1,
-                //scaleSteps: 6,
-                scaleOverride: true,
-
                 yAxes: [{
                     ticks: {
                         beginAtZero: true,
@@ -206,10 +207,7 @@ function drawIndoorTemperatureChart() {
 }
 
 function drawOutdoorTemperatureChart() {
-    console.log(weather.tempArray.slice(weather.tempArray.length - 100, weather.tempArray.length))
-    //draw chart
     var ctx = $("#outdoorTempChart");
-    //var chartArray = weather.tempArray.slice(weather.tempArray.length - 6, weather.tempArray.length)
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -229,9 +227,9 @@ function drawOutdoorTemperatureChart() {
         },
         options: {
             scales: {
-                scaleStepWidth: 1,
-                scaleSteps: 6,
-                scaleOverride: true,
+                //scaleStepWidth: 1,
+                //scaleSteps: 6,
+                //scaleOverride: true,
 
                 yAxes: [{
                     ticks: {
@@ -247,8 +245,7 @@ $("#searchButton").on("click", function () {
     event.preventDefault();
     user.location = $("#location-search").val().trim().toLowerCase()
     $("#location-search").text("")
-    $("#user-location").text(user.location)
+    //$("#user-location").text(user.location)
     $("#location-search").val("")
-    weatherPoll()
     NESTPoll()
 })
