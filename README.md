@@ -1,8 +1,10 @@
 # Group 4: Project Title: Nest Thermostat
 
 ### Team Members:
-- Christopher Donner [Chris' github](https://github.com/tiger2877)
-- Pryambudhi Cahyadi [Budhi's github](https://github.com/christopherdonner/)
+- Christopher Donner: [Chris' github](https://github.com/tiger2877)
+- Pryambudhi Cahyadi: [Budhi's github](https://github.com/christopherdonner/)
+
+- - -
 
 ### Project Description
 Weather forecast and indoor temperature control have been modernized for many years.
