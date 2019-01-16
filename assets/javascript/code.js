@@ -199,6 +199,7 @@ function drawIndoorTemperatureChart() {
         },
         options: {
             scales: {
+                
                 yAxes: [{
                     ticks: {
                         beginAtZero: true,
@@ -216,7 +217,7 @@ function drawOutdoorTemperatureChart() {
         data: {
             datasets: [{
                 label: 'outdoor temperature history:',
-                data: weather.tempArray.slice(weather.tempArray.length - 6, weather.tempArray.length),
+                data: weather.tempArray,
                 backgroundColor: [
                     'rgba(65,105,225, 0.2)'
                 ],
@@ -232,7 +233,7 @@ function drawOutdoorTemperatureChart() {
             scales: {
                 //scaleStepWidth: 1,
                 //scaleSteps: 6,
-                //scaleOverride: true,
+                scaleOverride: true,
 
                 yAxes: [{
                     ticks: {
