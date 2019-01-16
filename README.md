@@ -37,7 +37,7 @@ on click is created for the user's location -> on click pulls the value of the f
 - - -
 
 ### Sketch of Final Product: 
-![Nest Thermostat Project](snapshot.jpg)
+![Nest Thermostat Project](.\assets\images\snapshot.jpg)
 
 - - -
 
@@ -46,6 +46,8 @@ on click is created for the user's location -> on click pulls the value of the f
     * Nest API
     
  - - -  
+ ### New technology:
+    * chart.js
     
 ### Rough Breakdown of Tasks:
 * create the main html body
