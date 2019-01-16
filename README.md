@@ -14,7 +14,8 @@ From this user input data, users will be able to do the followings:
 - increment or decrement the thermostat target temperature. This must be bound by the actual thermostat limits of min=9 and max=32
 - chart out the historic data we pull from firebase
 
-Sketch of Final Product: TBD
+Sketch of Final Product: 
+
 
 APIs to be Used:
 - openweather API
