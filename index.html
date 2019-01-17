@@ -25,35 +25,16 @@
   
   <!-- Header Section -->
   <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container-fluid d-flex justify-content-between">
-          <!--<div class="navbar-header">
-               
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-              
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a href="#" class="navbar-brand d-flex align-items-center">
-                            <i class='fas fa-temperature-high' style='font-size:36px'></i>&nbsp;<strong>Nest Home Thermostat</strong>
-                            </a>
-                    </li>
-                    -->
-           
-                  </ul>
 
-                  <!-- location search box -->
-                  <form id="location" class="form-inline my-2 my-lg-0">
-                    <input id="location-search" class="form-control mr-sm-2" type="search" placeholder="Location" aria-label="Search">
-                    <button id="searchButton" class="btn btn-outline-success my-2 my-sm-0" >Search</button>
-                  </form>
-                </div>
-              </nav>
-
-      </div>
-    </nav>
+      <nav class="navbar navbar-dark bg-dark justify-content-between">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+              <i class='fas fa-temperature-high' style='font-size:36px'></i>&nbsp;<strong>Nest Home Thermostat</strong>
+          </a>
+          <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </nav>
   </header>
 
   <div class="container">
@@ -68,55 +49,62 @@
             <h1><span id="user-location"></h1>
             </div>
             
-            <p class="main-section">The Nest Thermostat is one of the most popular home thermostats on the market today.</p>
-            <p class="main-section">You can enter your location in the search box above and view your outdoor temperature.</p>
-            <p class="main-section">And, you can use our Nest Indoor Tempeature Control to change your indoor temperature.</p>
+            <section class="main-section">
+            <p>The Nest Thermostat is one of the most popular home thermostats on the market today.  </p>
+            <p>You can enter your location in the search box above and view your outdoor temperature.</p>
+            <p>And, you can use our Nest Indoor Tempeature Control to change your indoor temperature.</p>
+            </section>  
 
             <div class="row">
             <br>
+          
               <div class="col-md-4">
+                <section class="weather-section">
 
-                <!-- Show Open Weather API here        --> 
-
+                <!-- Show Open Weather API here --> 
                 <div id="outdoorTemp"></div>
+
                 <h2>Weather Description</h2>
-               
+      
                     <!-- We need to show temperature detail like humidity, temp max, temp min, and wind speed here  --> 
                     <!-- Show main.temp_max, main.temp_min and wind.speed  --> 
                     <!-- We need to use jquery to create tables and populate the temperature detail into temp detail  --> 
                     <span id ="temp-detail" class="user-temp" style="color: #13aab0"></span>
-                
+                  </section>
               </div>
 
                 <!-- indoor Nest temperature detail goes here -->
                 <div class="col-md-5">
-                  <div class="indoor-temp">
-                    <h2><span style ="font-size:5">Nest Indoor Temperature</span></h2>
-                                   
-                  </div>
-                  <img src="assets/images/indoor.JPG" align="left" height="150px;" style="margin-right:20px;" alt="Nest Home">
-
+                  <section class="weather-section">
+                    <div class="indoor-temp">
+                      <h2><span style ="font-size:5">Nest Indoor Temperature</span></h2>        
+                     </div>
+                      <img src="assets/images/indoor.JPG" align="left" height="150px;" style="margin-right:20px;" alt="Nest Home">
+            
                   <!-- we need to use jquery to get the span id and populate the indoor temp here -->
                   <p><span id="ambientTemp" class="mainresults">Ambient temperature:</span></p>
                   <p><span id="targetTemp" class="mainresults">Target Temperature:</span></p>
                   <p><span id="humidity" class="mainresults">Humidity:</span></p>
+
+                </section>
                 </div>
 
                 <div class="col-md-3">
                   <div class="nestControl">
                     <h2><span style ="font-size:5">Temperature Control</span></h2>
-                 
                   </div>
-                   <!-- we need to use jquery to get the button id and populate the indoor temp here -->
-                   <span id="thermostatDisplay" class="current-temp"></span>
-                   <img src="assets/images/home.jpg" align="left" height="150px;" class= "thermostatImage" style="margin-right:20px;" alt="Indoor Thermostat">
-            
-                  <!-- we need to use jquery to get the button id and populate the indoor temp here -->
-                                    <button id="tempUp" style='font-size:24px'><i class='fas fa-arrow-circle-up'></i></button>
-                  <br>
-                  <br>
-                  <button id="tempDown" style='font-size:24px'><i class='fas fa-arrow-circle-down'></i></button>
+
+                      <!-- we need to use jquery to get the button id and populate the indoor temp here -->
+                      <span id="thermostatDisplay" class="current-temp"></span>
+                      <img src="assets/images/home.jpg" align="left" height="150px;" class= "thermostatImage" style="margin-right:20px;" alt="Indoor Thermostat">
                 
+                      <!-- we need to use jquery to get the button id and populate the indoor temp here -->
+                      <button id="tempUp" style='font-size:24px'><i class='fas fa-arrow-circle-up'></i></button>
+                      <br>
+                      <br>
+                      <button id="tempDown" style='font-size:24px'><i class='fas fa-arrow-circle-down'></i></button>
+                      <p></p>
+                      
                 </div>
 
               </div>

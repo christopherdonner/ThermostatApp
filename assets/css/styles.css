@@ -24,6 +24,24 @@ body {
    clear: both;
 }
 
+.main-section {
+  width: 100%;
+  max-width: 1000px;
+
+  /* Box-model */
+  padding: 5px;
+
+  /* Positioning */
+  background: #fff;
+
+}
+
+.weather-section {
+  width: 100%;
+  max-width: 1000px;
+
+}
+
 .thermostatImage {
   left: 0px;
   top: 0px;
@@ -50,9 +68,6 @@ body {
 .col-md-4 .col-md-5 .col-md-6 {
   padding-top: 10px;
   margin-top: 10px;
-}
-.row {
-  width:1000px;
 }
 
 .chart {
@@ -87,6 +102,10 @@ h3 {
   font-size: 22px;
 }
 
+nav a:hover {
+  color: #666;
+}
+
 @media only screen and (max-width:980px) {
   nav {
     margin-right: 5px;
@@ -100,15 +119,12 @@ h3 {
   .chart {
     padding: 0.5px 0px 0.5px 0px;
     margin-top: 20px;
+    max-height: auto;
     max-width: 768px;
   }
 }
 
 @media only screen and (max-width: 768px) {
-  .main-section {
-    visibility: hidden;
-  
-  }
 
   h2,
   h3 {
@@ -127,26 +143,46 @@ h3 {
     z-index: -1;
   }
 
+  .main-section {
+    max-width: 100%;
+  }
+
+  .weather-section {
+    max-height: 550px;
+    max-width: 100%;
+    margin-left: 5px;
+    margin-bottom: 20px;
+    padding: 0.5 0.5 0.5 0.5;
+    border: 1px solid #ddd;
+
+  }
+
   .chart {
     padding: 0.5px 0px 0.5px 0px;
     margin-top: 20px;
-    max-width: 480px;
+    max-height:auto;
+    max-width: 550px;
   }
 
 }
 
 @media only screen and (max-width: 640px){
-  .main-section {
+  nav {
+    /* Box-model */
+    width: 100%;
+
     /* Positioning */
-    visibility: hidden;
-  
+    margin: 15px 0;
+
+    /* Typography */
+    text-align: center;
   }
 
   h2,
   h3 {
   font-size: 18px;
   
-}
+  }
 
   .container {
       padding-top: 0;
@@ -163,8 +199,15 @@ h3 {
     position: absolute;
     font-size: 20pt;
     color:#13aab0;
-    top: 115px;
-    left: 72px;
+    top: 113px;
+    left: 71px;
+  }
+
+  .chart {
+    padding: 0.5px 0px 0.5px 0px;
+    margin-top: 20px;
+    max-height: 400px;
+    max-width: auto;
   }
 
 }
