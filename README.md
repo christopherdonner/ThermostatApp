@@ -37,7 +37,7 @@ on click is created for the user's location -> on click pulls the value of the f
 - - -
 
 ### Sketch of Final Product: 
-![Nest Thermostat Project](.\assets\images\snapshot.jpg)
+![Nest Thermostat Project](https://github.com/christopherdonner/ThermostatApp/blob/master/assets/images/snapshot.JPG)
 
 - - -
 
