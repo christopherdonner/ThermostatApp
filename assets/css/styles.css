@@ -70,10 +70,12 @@ body {
   margin-top: 10px;
 }
 
+/*
 .chart {
   padding: 0.5px 0px 0.5px 0px;
   margin-top: 20px;
 }
+*/
 
 h1,
 h2,
@@ -116,12 +118,13 @@ nav a:hover {
     max-width: 768px;
   }
 
+  /*
   .chart {
     padding: 0.5px 0px 0.5px 0px;
     margin-top: 20px;
-    max-height: auto;
+    max-height: 200px;
     max-width: 768px;
-  }
+  }*/
 }
 
 @media only screen and (max-width: 768px) {
@@ -148,7 +151,7 @@ nav a:hover {
   }
 
   .weather-section {
-    max-height: 550px;
+    /*max-height: 550px;*/
     max-width: 100%;
     margin-left: 5px;
     margin-bottom: 20px;
@@ -157,12 +160,13 @@ nav a:hover {
 
   }
 
-  .chart {
+  /*.chart {
     padding: 0.5px 0px 0.5px 0px;
     margin-top: 20px;
-    max-height:auto;
+    max-height:200px;
     max-width: 550px;
   }
+  */
 
 }
 
@@ -203,11 +207,13 @@ nav a:hover {
     left: 71px;
   }
 
+  /*
   .chart {
     padding: 0.5px 0px 0.5px 0px;
     margin-top: 20px;
-    max-height: 400px;
+    max-height: 200px;
     max-width: auto;
   }
+  */
 
 }

@@ -76,9 +76,11 @@ database.ref().on("child_added", function (childSnapshot) {
     weather.tempArray.push(childSnapshot.val().outdoorTemp)
     console.log(thermostat.tempArray.slice(thermostat.tempArray.length - 7, thermostat.tempArray.length))
     console.log(weather.tempArray.slice(weather.tempArray.length - 7, weather.tempArray.length-1))
+    
     drawIndoorTemperatureChart()
     drawOutdoorTemperatureChart()
 })
+console.log(weather.tempArray)
 //NEST thermostat API AJAX call 
 var NESTPollInterval = setInterval(NESTPoll(), 1000 * 60 * 5)
 var WeatherPollInterval = setInterval(weatherPoll(), 1000 * 60 *5)
@@ -217,7 +219,7 @@ function drawOutdoorTemperatureChart() {
         data: {
             datasets: [{
                 label: 'outdoor temperature history:',
-                data: weather.tempArray,
+                data: weather.tempArray.slice(weather.tempArray.length - 6, weather.tempArray.length),
                 backgroundColor: [
                     'rgba(65,105,225, 0.2)'
                 ],
