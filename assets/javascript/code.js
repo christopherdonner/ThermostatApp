@@ -81,9 +81,9 @@ database.ref().on("child_added", function (childSnapshot) {
     console.log(thermostat.tempArray.slice(thermostat.tempArray.length - 7, thermostat.tempArray.length))
     console.log(weather.tempArray.slice(weather.tempArray.length - 7, weather.tempArray.length-1))
     
+    console.log(weather.tempArray)
     
 })
-console.log(weather.tempArray)
 //NEST thermostat API AJAX call 
 var NESTPollInterval = setInterval(NESTPoll(), 1000 * 60 * 5)
 var WeatherPollInterval = setInterval(weatherPoll(), 1000 * 60 *5)
@@ -164,6 +164,13 @@ $("#tempUp").on("click", function ()
         data: JSON.stringify({ "target_temperature_c": thermostat.targetTemp }),
         }).then(function () 
         {
+            database.ref().push({
+                currentTemp: thermostat.currentTemp,
+                targetTemp: thermostat.targetTemp,
+                humidity: thermostat.humidity,
+                outdoorTemp: weather.currentTemp,
+                outdoorHumidity: weather.humidity,
+            })
         })
     }
 })
@@ -180,6 +187,13 @@ $("#tempDown").on("click", function () {
                 headers: { "Authorization": "Bearer c.s7K5ndoFFMrwvCbFypU2U29sRxlTQZ4jSJTvWD6zHLOxuRJjznVkm38MJi204sQrJnFhvQn3pygTeoM8IFLpLZfQwSlXE47zzs6JrPzGHW3X4FRW0FqNlbOi9sUYeBfFMnLePx1Gjfqn8MgS" },
                 data: JSON.stringify({ "target_temperature_c": thermostat.targetTemp }),
             }).then(function () {
+                database.ref().push({
+                    currentTemp: thermostat.currentTemp,
+                    targetTemp: thermostat.targetTemp,
+                    humidity: thermostat.humidity,
+                    outdoorTemp: weather.currentTemp,
+                    outdoorHumidity: weather.humidity,
+                })
             })
         }
     })
@@ -192,7 +206,7 @@ function drawIndoorTemperatureChart() {
         data: {
             datasets: [{
                 label: 'thermostat target history:',
-                data: thermostat.tempArray.slice(thermostat.tempArray.length - 6, thermostat.tempArray.length),
+                data: thermostat.tempArray.slice(thermostat.tempArray.length - 7, thermostat.tempArray.length-1),
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                 ],
@@ -204,7 +218,9 @@ function drawIndoorTemperatureChart() {
         },
         options: {
             scales: {
-                
+                scaleStepWidth: 1,
+                scaleSteps: 6,
+                scaleOverride: true,
                 yAxes: [{
                     ticks: {
                         beginAtZero: true,
@@ -222,7 +238,7 @@ function drawOutdoorTemperatureChart() {
         data: {
             datasets: [{
                 label: 'outdoor temperature history:',
-                data: weather.tempArray.slice(weather.tempArray.length - 6, weather.tempArray.length),
+                data: weather.tempArray.slice(weather.tempArray.length - 7, weather.tempArray.length-1),
                 backgroundColor: [
                     'rgba(65,105,225, 0.2)'
                 ],
@@ -236,10 +252,9 @@ function drawOutdoorTemperatureChart() {
         },
         options: {
             scales: {
-                //scaleStepWidth: 1,
-                //scaleSteps: 6,
+                scaleStepWidth: 1,
+                scaleSteps: 6,
                 scaleOverride: true,
-
                 yAxes: [{
                     ticks: {
                         beginAtZero: true,
