@@ -43,6 +43,7 @@ function drawThermostatData() {
     $("#targetTemp").text(`Target Temperature: ${thermostat.targetTemp}`)
     $("#humidity").text(`Indoor Humidity: ${thermostat.humidity}`)
     $("#thermostatDisplay").text(`${thermostat.targetTemp}`)
+    drawIndoorTemperatureChart()
 }
 
 function drawWeatherData() {
@@ -55,6 +56,9 @@ function drawWeatherData() {
     $("#temp-detail").append(`Outdoor Humidity: ${weather.humidity}<br>`)
     $("#temp-detail").append(`Air Pressure: ${weather.airPressure} mbar<br>`)
     $("#temp-detail").append(`Wind Speed: ${weather.windSpeed}kts`)
+    drawOutdoorTemperatureChart()
+
+    
 }
 
 // Initialize Firebase
@@ -77,8 +81,7 @@ database.ref().on("child_added", function (childSnapshot) {
     console.log(thermostat.tempArray.slice(thermostat.tempArray.length - 7, thermostat.tempArray.length))
     console.log(weather.tempArray.slice(weather.tempArray.length - 7, weather.tempArray.length-1))
     
-    drawIndoorTemperatureChart()
-    drawOutdoorTemperatureChart()
+    
 })
 console.log(weather.tempArray)
 //NEST thermostat API AJAX call 
