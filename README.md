@@ -1,3 +1,5 @@
+## NOTE: This is no longer functional as a result of Google's acquisition of NEST and the subsequent deprecation of the Works With NEST API. https://variety.com/2019/digital/news/google-works-with-nest-discontinued-1203207335/
+
 # Group 4: Project Title: Nest Thermostat
 
 ### Team Members:
